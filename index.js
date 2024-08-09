@@ -6,7 +6,7 @@ const { Sequelize, DataTypes, QueryTypes } = require('sequelize');
 const app = express()
 const port = 10000
 
-const sequelize = new Sequelize('postgresql://postgres.yhogvuqcegpuxhumgkyn:' + 'chuchu-banco-vai-dar-bom' + '@aws-0-us-west-1.pooler.supabase.com:6543/postgres');
+const sequelize = new Sequelize('postgresql://postgres.xccfnuclebokrcnuowka:Bancods1234$@aws-0-us-west-1.pooler.supabase.com:6543/postgres');
 
 const User = sequelize.define(
     'User',
