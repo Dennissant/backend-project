@@ -225,5 +225,10 @@ sequelize.sync();
 // Exporta os modelos User e Category para que possam ser usados em outras partes da aplicação
 module.exports = {
     User,
-    Category
+    Category,
+    Product,
+    ProductImage,
+    ProductOption,
+    ProductCategory,
+
 }
