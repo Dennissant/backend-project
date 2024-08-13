@@ -5,7 +5,9 @@ const { uri } = require('../config/database.js');
 const { Sequelize, DataTypes, QueryTypes } = require('sequelize');
 
 // Cria uma nova instância do Sequelize usando a URI de conexão do banco de dados
+
 const sequelize = new Sequelize(uri);
+
 
 // Define o modelo para a tabela 'User'
 const User = sequelize.define(

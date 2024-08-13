@@ -5,6 +5,11 @@ const { User } = require('../models/models.js');
 app.get('/', (req, res) => {
     res.send('Olá, mundo')
 })
+app.get('/v1/user', (request, res) => {
+    console.log('request.url', request.url) // debug
+    User.findAll().then((result) => res.send(result))
+})
+
 
 app.get('/v1/user/:id', (request, res) => {
     console.log('request.url', request.url) // debug
@@ -14,7 +19,8 @@ app.get('/v1/user/:id', (request, res) => {
         .then((result) => res.send(result))
 })
 
-app.post('/v1/user', (request, res) => {
+
+app.post('/v1/user/', (request, res) => {
     console.log('request.url', request.url) // debug
     console.log('request.body', request.body)
 
