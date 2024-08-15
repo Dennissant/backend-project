@@ -1,12 +1,12 @@
 const app = require('./app-express.js')
 
-const { cartegory, Cartegory } = require('../models/models.js');
+const { Cartegory, Cartegory } = require('../models/index.js');
 
 app.get('/', (req, res) => {
     res.send('Olá, mundo')
 })
 
-app.get('/v1/cartegory/:id', (request, res) => {
+app.get('/v1/Cartegory/:id', (request, res) => {
     console.log('request.url', request.url) // debug
     console.log('request.params.id', request.params.id)
 
@@ -14,13 +14,13 @@ app.get('/v1/cartegory/:id', (request, res) => {
         .then((result) => res.send(result))
 })
 
-app.get('/v1/cartegory/', (request, res) => {
+app.get('/v1/Cartegory/', (request, res) => {
     console.log('request.url', request.url) // debug
     Cartegory.findAll()
         .then((result) => res.send(result))
 })
 
-app.post('/v1/cartegory', (request, res) => {
+app.post('/v1/Cartegory', (request, res) => {
     console.log('request.url', request.url) // debug
     console.log('request.body', request.body)
 
@@ -28,15 +28,15 @@ app.post('/v1/cartegory', (request, res) => {
 })
 
 
-app.put('/v1/cartegory/:id', (request, res) => {
+app.put('/v1/Cartegory/:id', (request, res) => {
     console.log('request.url', request.url) // debug
     console.log('request.body', request.body)
     Cartegory.update(request.body, { where: { id: request.params.id } }).then((result) => res.send(result))
 })
 
-app.delete('/v1/cartegory/:id', (request, res) => {
+app.delete('/v1/Cartegory/:id', (request, res) => {
     console.log('request.url', request.url) // debug
-    cartegory.destroy({ where: { id: request.params.id } }).then((result) => {
+    Cartegory.destroy({ where: { id: request.params.id } }).then((result) => {
         res.send('deletei com sucesso essa quantidade de linhas: '+result)
     })
 })

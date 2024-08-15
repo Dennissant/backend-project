@@ -1,42 +1,60 @@
-const app = require('./app-express.js')
+const express = require('express');
+const app = express();
+app.use(express.json()); // Adicione isso para o parser de JSON no body das requisições
 
-const { product, Product } = require('../models/models.js');
+const { Product } = require('../models/index'); // Corrigido: Importação única e sem '.js'
 
+// Rota de teste
 app.get('/', (req, res) => {
-    res.send('Olá, mundo')
-})
+    res.send('Olá, mundo');
+});
 
-app.get('/v1/product/:id', (request, res) => {
-    console.log('request.url', request.url) // debug
-    console.log('request.params.id', request.params.id)
+// Rota para obter um produto pelo ID
+app.get('/v1/Product/:id', (req, res) => {
+    console.log('request.url', req.url); // Debug
+    console.log('request.params.id', req.params.id);
 
-    Product.findOne({ where: { id: request.params.id } })
+    Product.findOne({ where: { id: req.params.id } })
         .then((result) => res.send(result))
-})
+        .catch((error) => res.status(500).send(error.message));
+});
 
-app.get('/v1/product/', (request, res) => {
-    console.log('request.url', request.url) // debug
+// Rota para obter todos os produtos
+app.get('/v1/Product/', (req, res) => {
+    console.log('request.url', req.url); // Debug
+
     Product.findAll()
         .then((result) => res.send(result))
-})
+        .catch((error) => res.status(500).send(error.message));
+});
 
-app.post('/v1/product', (request, res) => {
-    console.log('request.url', request.url) // debug
-    console.log('request.body', request.body)
+// Rota para criar um novo produto
+app.post('/v1/Product', (req, res) => {
+    console.log('request.url', req.url); // Debug
+    console.log('request.body', req.body);
 
-    Product.create(request.body).then((result) => res.status(201).send(result))
-})
+    Product.create(req.body)
+        .then((result) => res.status(201).send(result))
+        .catch((error) => res.status(500).send(error.message));
+});
 
+// Rota para atualizar um produto existente
+app.put('/v1/Product/:id', (req, res) => {
+    console.log('request.url', req.url); // Debug
+    console.log('request.body', req.body);
 
-app.put('/v1/product/:id', (request, res) => {
-    console.log('request.url', request.url) // debug
-    console.log('request.body', request.body)
-    Product.update(request.body, { where: { id: request.params.id } }).then((result) => res.send(result))
-})
+    Product.update(req.body, { where: { id: req.params.id } })
+        .then((result) => res.send(result))
+        .catch((error) => res.status(500).send(error.message));
+});
 
-app.delete('/v1/product/:id', (request, res) => {
-    console.log('request.url', request.url) // debug
-    product.destroy({ where: { id: request.params.id } }).then((result) => {
-        res.send('deletei com sucesso essa quantidade de linhas: '+result)
-    })
-})
+// Rota para excluir um produto
+app.delete('/v1/Product/:id', (req, res) => {
+    console.log('request.url', req.url); // Debug
+
+    Product.destroy({ where: { id: req.params.id } })
+        .then((result) => res.send('Deletado com sucesso, quantidade de linhas afetadas: ' + result))
+        .catch((error) => res.status(500).send(error.message));
+});
+
+module.exports = app;
