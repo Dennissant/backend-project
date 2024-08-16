@@ -1,6 +1,7 @@
 // src/models/User.js
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { Sequelize, DataTypes } = require('sequelize');
+const { uri } = require('../config/database.js');
+const sequelize = new Sequelize(uri);
 
 const User = sequelize.define('User', {
   firstname: {
@@ -24,4 +25,6 @@ const User = sequelize.define('User', {
   timestamps: true,
 });
 
-module.exports = User;
+sequelize.sync()
+
+module.exports = {User};

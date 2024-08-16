@@ -1,6 +1,7 @@
 // src/models/ProductCategory.js
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { Sequelize, DataTypes } = require('sequelize');
+const { uri } = require('../config/database.js');
+const sequelize = new Sequelize(uri);
 const Product = require('./Product');
 const Category = require('./Category');
 
@@ -29,4 +30,6 @@ const ProductCategory = sequelize.define('ProductCategory', {
   timestamps: true,
 });
 
-module.exports = ProductCategory;
+sequelize.sync()
+
+module.exports = {ProductCategory};

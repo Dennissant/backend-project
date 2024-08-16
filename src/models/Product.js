@@ -1,6 +1,7 @@
 // src/models/Product.js
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { Sequelize, DataTypes } = require('sequelize');
+const { uri } = require('../config/database.js');
+const sequelize = new Sequelize(uri);
 
 const Product = sequelize.define('Product', {
   id: {
@@ -47,4 +48,6 @@ const Product = sequelize.define('Product', {
   timestamps: true,
 });
 
-module.exports = Product;
+sequelize.sync()
+
+module.exports = {Product};

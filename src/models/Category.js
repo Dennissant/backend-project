@@ -1,6 +1,7 @@
 // src/models/Category.js
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { Sequelize, DataTypes } = require('sequelize');
+const { uri } = require('../config/database.js');
+const sequelize = new Sequelize(uri);
 
 const Category = sequelize.define('Category', {
   name: {
@@ -20,4 +21,6 @@ const Category = sequelize.define('Category', {
   timestamps: true,
 });
 
-module.exports = Category;
+sequelize.sync()
+
+module.exports = {Category};

@@ -1,6 +1,6 @@
 const app = require('./app-express.js')
 
-const { User } = require('../models/index.js');
+const { User } = require('../models/User');
 
 app.get('/', (req, res) => {
     res.send('Olá, mundo')
@@ -10,7 +10,6 @@ app.get('/v1/User', (request, res) => {
     User.findAll().then((result) => res.send(result))
 })
 
-
 app.get('/v1/User/:id', (request, res) => {
     console.log('request.url', request.url) // debug
     console.log('request.params.id', request.params.id)
@@ -19,14 +18,12 @@ app.get('/v1/User/:id', (request, res) => {
         .then((result) => res.send(result))
 })
 
-
 app.post('/v1/User/', (request, res) => {
     console.log('request.url', request.url) // debug
     console.log('request.body', request.body)
 
     User.create(request.body).then((result) => res.status(201).send(result))
 })
-
 
 app.put('/v1/User/:id', (request, res) => {
     console.log('request.url', request.url) // debug

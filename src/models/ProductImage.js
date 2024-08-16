@@ -1,6 +1,7 @@
 // src/models/ProductImage.js
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { Sequelize, DataTypes } = require('sequelize');
+const { uri } = require('../config/database.js');
+const sequelize = new Sequelize(uri);
 const Product = require('./Product');
 
 const ProductImage = sequelize.define('ProductImage', {
@@ -32,4 +33,6 @@ const ProductImage = sequelize.define('ProductImage', {
   timestamps: true,
 });
 
-module.exports = ProductImage;
+sequelize.sync()
+
+module.exports = {ProductImage};

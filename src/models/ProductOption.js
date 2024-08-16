@@ -1,6 +1,7 @@
 // src/models/ProductOption.js
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const { Sequelize, DataTypes } = require('sequelize');
+const { uri } = require('../config/database.js');
+const sequelize = new Sequelize(uri);
 const Product = require('./Product');
 
 const ProductOption = sequelize.define('ProductOption', {
@@ -46,4 +47,6 @@ const ProductOption = sequelize.define('ProductOption', {
   timestamps: true,
 });
 
-module.exports = ProductOption;
+sequelize.sync()
+
+module.exports = {ProductOption};
